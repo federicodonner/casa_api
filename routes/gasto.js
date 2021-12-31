@@ -1,6 +1,8 @@
 // Route file for getting and editing gastos
 var express = require("express");
 var router = express.Router();
+const multer = require("multer");
+const upload = multer();
 var db = require("../config/db.js");
 const { check, escape, validationResult } = require("express-validator");
 var messages = require("../data/messages.js");
@@ -9,6 +11,7 @@ var messages = require("../data/messages.js");
 router.post(
   "/:casaHash",
   [
+    upload.none(),
     check("casaHash").escape(),
     check("date").isNumeric(),
     check("name").escape(),

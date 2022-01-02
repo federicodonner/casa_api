@@ -17,6 +17,10 @@ var oauthRoute = require("./routes/oauth");
 app.use("/oauth", oauthRoute);
 
 // Routes for casa operations
+var usuarioRoute = require("./routes/usuario");
+app.use("/usuario", usuarioRoute);
+
+// Routes for casa operations
 var casaRoute = require("./routes/casa");
 app.use("/casa", casaRoute);
 
@@ -24,6 +28,6 @@ app.use("/casa", casaRoute);
 var gastoRoute = require("./routes/gasto");
 app.use("/gasto", gastoRoute);
 
-app.listen("3000", () => {
-  console.log("server started on port 3000");
+app.listen("3001", () => {
+  console.log("server started on port 3001");
 });

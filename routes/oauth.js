@@ -47,7 +47,7 @@ router.post("/", [upload.none(), check("username").escape()], (req, res) => {
       ",'" +
       loginToken +
       "')";
-    let query = db.query(sql, (err, results) => {
+    query = db.query(sql, (err, results) => {
       if (err) {
         throw err;
       }

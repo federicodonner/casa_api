@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Dec 30, 2021 at 01:14 AM
+-- Generation Time: Jan 02, 2022 at 02:05 AM
 -- Server version: 5.7.32
 -- PHP Version: 7.4.12
 
@@ -103,6 +103,7 @@ DROP TABLE IF EXISTS `usuario`;
 CREATE TABLE `usuario` (
   `id` int(11) NOT NULL,
   `nombre` varchar(200) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `username` varchar(200) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
   `casaId` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 

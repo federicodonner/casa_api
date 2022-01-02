@@ -13,6 +13,10 @@ var authenticationMiddleware = require("./middleware/authentication");
 app.use("/gasto", authenticationMiddleware.authentication);
 
 // Routes for casa operations
+var oauthRoute = require("./routes/oauth");
+app.use("/oauth", oauthRoute);
+
+// Routes for casa operations
 var casaRoute = require("./routes/casa");
 app.use("/casa", casaRoute);
 

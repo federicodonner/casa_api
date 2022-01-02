@@ -3,9 +3,9 @@ var express = require("express");
 var router = express.Router();
 const multer = require("multer");
 const upload = multer();
-var db = require("../config/db.js");
+var db = require("../config/db");
 const { check, escape, validationResult } = require("express-validator");
-var messages = require("../data/messages.js");
+var messages = require("../data/messages");
 
 // Create a new gasto
 router.post(

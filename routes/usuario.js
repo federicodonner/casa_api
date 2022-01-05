@@ -17,7 +17,7 @@ router.post(
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       // If one of them isn't, returns an error
-      return res.status(400).send(messages.PARAMETERS_ERROR);
+      return res.status(400).json({ message: messages.PARAMETERS_ERROR });
     }
     // Loads the data into variables to use
     var userUsername = req.body.username;
@@ -25,12 +25,12 @@ router.post(
 
     // Validates that all the compulsory fields are present
     if (!userUsername || !userNombre) {
-      return res.status(400).send(messages.PARAMETERS_ERROR);
+      return res.status(400).json({ message: messages.PARAMETERS_ERROR });
     }
 
     // Validates that the username has no spaces
     if (userUsername.indexOf(" ") !== -1) {
-      return res.status(400).send(messages.USERNAME_INCORRECT);
+      return res.status(400).json({ message: messages.USERNAME_INCORRECT });
     }
 
     // Verifies that the username is not already in use
@@ -41,7 +41,7 @@ router.post(
       }
       // If there is at least one result, return error
       if (results.length) {
-        return res.status(404).send(messages.USERNAME_REPEAT);
+        return res.status(400).json({ message: messages.USERNAME_REPEAT });
       }
 
       // Adds the user to the database
@@ -84,6 +84,42 @@ router.post(
           });
         });
       });
+    });
+  }
+);
+
+router.post(
+  "/verify",
+  [upload.none(), check("username").escape()],
+  (req, res) => {
+    // Validates that the parameters are correct
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      // If one of them isn't, returns an error
+      return res.status(400).json({ message: messages.PARAMETERS_ERROR });
+    }
+    // Loads the data into variables to use
+    var userUsername = req.body.username;
+    // Validates that all the compulsory fields are present
+    if (!userUsername) {
+      return res.status(400).json({ message: messages.PARAMETERS_ERROR });
+    }
+    // Validates that the username has no spaces
+    if (userUsername.indexOf(" ") !== -1) {
+      return res.status(400).json({ message: messages.USERNAME_INCORRECT });
+    }
+    // Verifies that the username is not already in use
+    let sql = "SELECT * FROM usuario WHERE username = '" + userUsername + "'";
+    let query = db.query(sql, (err, results) => {
+      if (err) {
+        throw err;
+      }
+      // If there is at least one result, return error
+      if (results.length) {
+        return res.status(404).json({ message: messages.USERNAME_REPEAT });
+      }
+      // If the username doesn't exist, respond 200
+      return res.status(200).json({ message: messages.USERNAME_CORRECT });
     });
   }
 );

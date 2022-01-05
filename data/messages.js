@@ -10,6 +10,7 @@ const messages = {
     "El nombre de usuario seleccionado no es correcto, por favor seleccione otro.",
   USERNAME_REPEAT:
     "El nombre de usuario seleccionado ya está en uso, por favor seleccione otro.",
+  USERNAME_CORRECT: "El nombre de usuario seleccionado es correcto.",
 };
 
 module.exports = messages;

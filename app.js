@@ -1,5 +1,6 @@
 const express = require("express");
 const mysql = require("mysql");
+const cors = require("cors");
 
 const app = express();
 app.use(
@@ -7,6 +8,9 @@ app.use(
     extended: true,
   })
 );
+
+// Middleware for cors
+app.use(cors());
 
 // Middleware for authentication
 var authenticationMiddleware = require("./middleware/authentication");
